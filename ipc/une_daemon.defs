@@ -1,0 +1,16 @@
+#include <mach/std_types.defs>
+#include <mach/mach_types.defs>
+
+serverprefix unedaemonserver_;
+subsystem ipc 2014042200;
+userprefix unedaemonclient_;
+
+type session_name_t = array[*:128] of char;
+
+routine get_agent
+(
+	requestport server : mach_port_t;
+session_type : uint32_t;
+out out_pid: uint32_t;
+waittime wait : uint32_t
+);

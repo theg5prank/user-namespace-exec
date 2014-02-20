@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>StandardErrorPath</key>
+	<string>/var/log/une.log</string>
+	<key>Label</key>
+	<string>net.conorh.user-namespace-execd</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/usr/local/libexec/user-namespace-execd</string>
+	</array>
+	<key>MachServices</key>
+	<dict>
+		<key>net.conorh.user-namespace-execd.exec</key>
+		<true/>
+		<key>net.conorh.user-namespace-execd.agent</key>
+		<true/>
+	</dict>
+</dict>
+</plist>
