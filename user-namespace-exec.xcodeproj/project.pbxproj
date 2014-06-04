@@ -30,11 +30,13 @@
 		EF5A7BC918B5B6CD0083DE78 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5A7BC818B5B6CD0083DE78 /* main.m */; };
 		EF5A7BCD18B5B6CD0083DE78 /* user_namespace_exec_agent.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = EF5A7BCC18B5B6CD0083DE78 /* user_namespace_exec_agent.1 */; };
 		EF5A7BD518B5B9750083DE78 /* net.conorh.user-namespace-exec-agent.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = EF5A7BD318B5B8E00083DE78 /* net.conorh.user-namespace-exec-agent.plist */; };
-		EF82409A190757340042F767 /* une_daemon.defs in Sources */ = {isa = PBXBuildFile; fileRef = EF824099190757340042F767 /* une_daemon.defs */; settings = {ATTRIBUTES = (Server, ); }; };
-		EF82409B190759020042F767 /* une_daemon.defs in Sources */ = {isa = PBXBuildFile; fileRef = EF824099190757340042F767 /* une_daemon.defs */; };
+		EF82409A190757340042F767 /* une_client.defs in Sources */ = {isa = PBXBuildFile; fileRef = EF824099190757340042F767 /* une_client.defs */; settings = {ATTRIBUTES = (Server, ); }; };
+		EF82409B190759020042F767 /* une_client.defs in Sources */ = {isa = PBXBuildFile; fileRef = EF824099190757340042F767 /* une_client.defs */; };
 		EF9758C118B5A666006B774B /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = EF9758C018B5A666006B774B /* main.c */; };
 		EF9758C318B5A666006B774B /* user_namespace_execd.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = EF9758C218B5A666006B774B /* user_namespace_execd.1 */; };
 		EF9758D418B5AA36006B774B /* net.conorh.user-namespace-execd.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = EF9758C818B5A6C3006B774B /* net.conorh.user-namespace-execd.plist */; };
+		EFC8285D193D764A001367B8 /* une_agent.defs in Sources */ = {isa = PBXBuildFile; fileRef = EFC8285C193D764A001367B8 /* une_agent.defs */; settings = {ATTRIBUTES = (Server, ); }; };
+		EFC8285E193D769A001367B8 /* une_agent.defs in Sources */ = {isa = PBXBuildFile; fileRef = EFC8285C193D764A001367B8 /* une_agent.defs */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,11 +128,12 @@
 		EF5A7BCB18B5B6CD0083DE78 /* user-namespace-exec-agent-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "user-namespace-exec-agent-Prefix.pch"; sourceTree = "<group>"; };
 		EF5A7BCC18B5B6CD0083DE78 /* user_namespace_exec_agent.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = user_namespace_exec_agent.1; sourceTree = "<group>"; };
 		EF5A7BD318B5B8E00083DE78 /* net.conorh.user-namespace-exec-agent.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "net.conorh.user-namespace-exec-agent.plist"; sourceTree = "<group>"; };
-		EF824099190757340042F767 /* une_daemon.defs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mig; path = une_daemon.defs; sourceTree = "<group>"; };
+		EF824099190757340042F767 /* une_client.defs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mig; path = une_client.defs; sourceTree = "<group>"; };
 		EF9758BD18B5A666006B774B /* user-namespace-execd */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "user-namespace-execd"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF9758C018B5A666006B774B /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		EF9758C218B5A666006B774B /* user_namespace_execd.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = user_namespace_execd.1; sourceTree = "<group>"; };
 		EF9758C818B5A6C3006B774B /* net.conorh.user-namespace-execd.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "net.conorh.user-namespace-execd.plist"; sourceTree = "<group>"; };
+		EFC8285C193D764A001367B8 /* une_agent.defs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mig; path = une_agent.defs; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,7 +219,8 @@
 		EF824098190756FF0042F767 /* ipc */ = {
 			isa = PBXGroup;
 			children = (
-				EF824099190757340042F767 /* une_daemon.defs */,
+				EF824099190757340042F767 /* une_client.defs */,
+				EFC8285C193D764A001367B8 /* une_agent.defs */,
 			);
 			path = ipc;
 			sourceTree = "<group>";
@@ -352,7 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF0FB3A718B5AAAD00C701FB /* main.m in Sources */,
-				EF82409B190759020042F767 /* une_daemon.defs in Sources */,
+				EF82409B190759020042F767 /* une_client.defs in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFC8285E193D769A001367B8 /* une_agent.defs in Sources */,
 				EF5A7BC918B5B6CD0083DE78 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,7 +374,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF9758C118B5A666006B774B /* main.c in Sources */,
-				EF82409A190757340042F767 /* une_daemon.defs in Sources */,
+				EFC8285D193D764A001367B8 /* une_agent.defs in Sources */,
+				EF82409A190757340042F767 /* une_client.defs in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

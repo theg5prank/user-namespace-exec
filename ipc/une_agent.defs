@@ -1,0 +1,18 @@
+#include <mach/std_types.defs>
+#include <mach/mach_types.defs>
+
+serverprefix unedaemonserver_;
+subsystem agentipc 2014060200;
+userprefix unedaemonagent_;
+
+type session_name_t = array[*:128] of char;
+
+routine register
+(
+	requestport server : mach_port_t;
+	session_type : uint32_t;
+	agent_bootstrap_port: mach_port_send_t;
+	out out_death_port: mach_port_send_t;
+#	ServerAuditToken ucreds : audit_token_t;
+	waittime wait : uint32_t
+);
