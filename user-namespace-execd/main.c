@@ -32,8 +32,10 @@ static void ipc_loop(mach_port_t port_set)
 {
 	kern_return_t kr = KERN_SUCCESS;
 	typedef union {
-		union __RequestUnion__unedaemonserver_clientipc_subsystem req;
-		union __ReplyUnion__unedaemonserver_clientipc_subsystem rep;
+		union __RequestUnion__unedaemonserver_clientipc_subsystem creq;
+		union __ReplyUnion__unedaemonserver_clientipc_subsystem crep;
+		union __RequestUnion__unedaemonserver_agentipc_subsystem areq;
+		union __ReplyUnion__unedaemonserver_agentipc_subsystem arep;
 	} MAX_MSG_BUFFER;
 	
 	do {
