@@ -39,8 +39,6 @@ int main(int argc, const char * argv[])
 		errx(EX_SOFTWARE, "Couldn't get agent: %s", mach_error_string(kr));
 	}
 	
-	printf("%d\n", new_bsport);
-	
 	kr = task_set_bootstrap_port(mach_task_self(), new_bsport);
 	
 	if (kr != KERN_SUCCESS) {

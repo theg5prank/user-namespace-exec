@@ -5,8 +5,6 @@ serverprefix unedaemonserver_;
 subsystem agentipc 2014060200;
 userprefix unedaemonagent_;
 
-type session_name_t = array[*:128] of char;
-
 routine register
 (
 	requestport server : mach_port_t;

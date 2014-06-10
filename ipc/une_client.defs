@@ -5,8 +5,6 @@ serverprefix unedaemonserver_;
 subsystem clientipc 2014042200;
 userprefix unedaemonclient_;
 
-type session_name_t = array[*:128] of char;
-
 routine get_agent
 (
 	requestport server : mach_port_t;
