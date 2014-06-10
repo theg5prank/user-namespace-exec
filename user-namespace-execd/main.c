@@ -14,6 +14,7 @@
 #include <sysexits.h>
 #include <mach/mach.h>
 #include <servers/bootstrap.h>
+#include <bsm/libbsm.h>
 
 
 #include "user-namespace-exec-constants.h"
@@ -39,7 +40,7 @@ static void ipc_loop(mach_port_t port_set)
 		kr = mach_msg_server_once(server_demux,
 								  sizeof(MAX_MSG_BUFFER)+ MAX_TRAILER_SIZE,
 								  port_set,
-								  0);
+								  MACH_RCV_TRAILER_ELEMENTS(MACH_RCV_TRAILER_AUDIT) | MACH_RCV_TRAILER_TYPE(MACH_MSG_TRAILER_FORMAT_0));
 		if (kr == MACH_RCV_INTERRUPTED) {
 			kr = KERN_SUCCESS;
 		}
@@ -48,27 +49,23 @@ static void ipc_loop(mach_port_t port_set)
 	errx(EX_OSERR, "mach_msg_server_once() failed: %d: %s", kr, mach_error_string(kr));
 }
 
-kern_return_t unedaemonserver_get_agent(mach_port_t sp, uint32_t session_type, 	mach_port_t *out_agent_port, mach_msg_type_name_t *out_agent_portPoly)
+kern_return_t unedaemonserver_get_agent(mach_port_t sp, uint32_t session_type, 	mach_port_t *out_agent_port, mach_msg_type_name_t *out_agent_portPoly, audit_token_t ucreds)
 
 {
+	fprintf(stderr, "cool sending a port over. We got %d %d\n", session_type, audit_token_to_auid(ucreds));
 	*out_agent_port = bootstrap_port;
 	*out_agent_portPoly = MACH_MSG_TYPE_COPY_SEND;
 	return KERN_SUCCESS;
 }
 
-//kern_return_t unedaemonserver_register(mach_port_t server, uint32_t session_type,
-//									   mach_port_t agent_bootstrap_port, mach_port_t *out_death_port,
-//									   mach_msg_type_name_t *death_portPoly, audit_token_t ucreds)
-//kern_return_t unedaemonserver_register(mach_port_t server, uint32_t session_type,
-//									   mach_port_t agent_bootstrap_port)
 kern_return_t unedaemonserver_register(mach_port_t server, uint32_t session_type,
 									   mach_port_t agent_bootstrap_port, mach_port_t *out_death_port,
-									   mach_msg_type_name_t *death_portPoly)
+									   mach_msg_type_name_t *death_portPoly, audit_token_t ucreds)
 {
 	*out_death_port = death_port;
 	*death_portPoly = MACH_MSG_TYPE_MAKE_SEND;
 	
-	fprintf(stderr, "Cool sending a port over. We got %d %d", agent_bootstrap_port, session_type);
+	fprintf(stderr, "Cool registering a port. We got %d %d %d\n", agent_bootstrap_port, session_type, audit_token_to_auid(ucreds));
 	
 	return KERN_SUCCESS;
 }

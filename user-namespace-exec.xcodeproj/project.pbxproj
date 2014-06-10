@@ -32,6 +32,7 @@
 		EF5A7BD518B5B9750083DE78 /* net.conorh.user-namespace-exec-agent.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = EF5A7BD318B5B8E00083DE78 /* net.conorh.user-namespace-exec-agent.plist */; };
 		EF82409A190757340042F767 /* une_client.defs in Sources */ = {isa = PBXBuildFile; fileRef = EF824099190757340042F767 /* une_client.defs */; settings = {ATTRIBUTES = (Server, ); }; };
 		EF82409B190759020042F767 /* une_client.defs in Sources */ = {isa = PBXBuildFile; fileRef = EF824099190757340042F767 /* une_client.defs */; };
+		EF8F621A1946A542004612B0 /* libbsm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8F62191946A542004612B0 /* libbsm.dylib */; };
 		EF9758C118B5A666006B774B /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = EF9758C018B5A666006B774B /* main.c */; };
 		EF9758C318B5A666006B774B /* user_namespace_execd.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = EF9758C218B5A666006B774B /* user_namespace_execd.1 */; };
 		EF9758D418B5AA36006B774B /* net.conorh.user-namespace-execd.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = EF9758C818B5A6C3006B774B /* net.conorh.user-namespace-execd.plist */; };
@@ -129,6 +130,7 @@
 		EF5A7BCC18B5B6CD0083DE78 /* user_namespace_exec_agent.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = user_namespace_exec_agent.1; sourceTree = "<group>"; };
 		EF5A7BD318B5B8E00083DE78 /* net.conorh.user-namespace-exec-agent.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "net.conorh.user-namespace-exec-agent.plist"; sourceTree = "<group>"; };
 		EF824099190757340042F767 /* une_client.defs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mig; path = une_client.defs; sourceTree = "<group>"; };
+		EF8F62191946A542004612B0 /* libbsm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbsm.dylib; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/libbsm.dylib; sourceTree = DEVELOPER_DIR; };
 		EF9758BD18B5A666006B774B /* user-namespace-execd */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "user-namespace-execd"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF9758C018B5A666006B774B /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		EF9758C218B5A666006B774B /* user_namespace_execd.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = user_namespace_execd.1; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF8F621A1946A542004612B0 /* libbsm.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +169,7 @@
 		EF0FB3A218B5AAAD00C701FB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EF8F62191946A542004612B0 /* libbsm.dylib */,
 				EF0FB3A318B5AAAD00C701FB /* Foundation.framework */,
 			);
 			name = Frameworks;

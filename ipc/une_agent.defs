@@ -13,6 +13,6 @@ routine register
 	session_type : uint32_t;
 	agent_bootstrap_port: mach_port_send_t;
 	out out_death_port: mach_port_send_t;
-#	ServerAuditToken ucreds : audit_token_t;
+	ServerAuditToken ucreds : audit_token_t;
 	waittime wait : uint32_t
 );
