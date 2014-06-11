@@ -6,9 +6,9 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-#import <err.h>
-#import <sysexits.h>
+#include <stdlib.h>
+#include <err.h>
+#include <sysexits.h>
 #include <mach/mach.h>
 #include <servers/bootstrap.h>
 
