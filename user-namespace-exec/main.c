@@ -6,10 +6,10 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-#import <xpc/xpc.h>
-#import <sysexits.h>
-#import <err.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sysexits.h>
+#include <err.h>
 #include <mach/mach.h>
 #include <servers/bootstrap.h>
 
