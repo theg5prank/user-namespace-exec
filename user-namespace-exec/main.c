@@ -37,6 +37,8 @@ int main(int argc, const char * argv[])
 	
 	if (kr != KERN_SUCCESS) {
 		errx(EX_SOFTWARE, "Couldn't get agent: %s", mach_error_string(kr));
+	} else if (new_bsport == MACH_PORT_NULL || new_bsport == MACH_PORT_DEAD) {
+		errx(EX_SOFTWARE, "Got bogus bootstrap port 0x%08x", new_bsport);
 	}
 	
 	kr = task_set_bootstrap_port(mach_task_self(), new_bsport);

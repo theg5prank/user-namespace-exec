@@ -15,13 +15,62 @@
 #include <mach/mach.h>
 #include <servers/bootstrap.h>
 #include <bsm/libbsm.h>
-
+#include <stdlib.h>
+#include <assert.h>
 
 #include "user-namespace-exec-constants.h"
 #include "une_clientServer.h"
 #include "une_agentServer.h"
 
+struct user_bootstrap_registration {
+	uid_t uid;
+	mach_port_t bsports[USER_EXEC_SESSION_TYPE_MAX + 1];
+	mach_port_t death_port;
+};
+
 static mach_port_t death_port = MACH_PORT_NULL;
+
+static struct user_bootstrap_registration *bootstrap_registrations = NULL;
+static size_t num_bootstrap_registrations = 0;
+static size_t bootstrap_registrations_size = 0;
+
+static struct user_bootstrap_registration *uid_to_bootstrap_registration(uid_t uid)
+{
+	for (size_t i=0; i < num_bootstrap_registrations; i++) {
+		if (bootstrap_registrations[i].uid == uid) {
+			return &bootstrap_registrations[i];
+		}
+	}
+	
+	if (num_bootstrap_registrations >= bootstrap_registrations_size) {
+		size_t newsize = num_bootstrap_registrations ? sizeof(*bootstrap_registrations) * num_bootstrap_registrations * 2 : 8;
+		bootstrap_registrations = realloc(bootstrap_registrations, newsize);
+		assert(bootstrap_registrations);
+		bootstrap_registrations_size = newsize;
+	}
+	
+	struct user_bootstrap_registration *registration = &bootstrap_registrations[num_bootstrap_registrations++];
+	
+	registration->uid = uid;
+	registration->death_port = MACH_PORT_NULL;
+	for (int i=0; i < sizeof(registration->bsports) / sizeof(registration->bsports[0]); i++) {
+		registration->bsports[i] = MACH_PORT_NULL;
+	}
+	
+	return registration;
+}
+
+static void add_bootstrap_registration(uid_t uid, uint32_t session_type, mach_port_t bsport)
+{
+	struct user_bootstrap_registration *registration = uid_to_bootstrap_registration(uid);
+	
+	registration->bsports[session_type] = bsport;
+}
+
+static mach_port_t lookup_bootstrap_registration(uid_t uid, uint32_t session_type)
+{
+	return uid_to_bootstrap_registration(uid)->bsports[session_type];
+}
 
 boolean_t server_demux(mach_msg_header_t *InHeadP, mach_msg_header_t *OutHeadP)
 {
@@ -55,7 +104,8 @@ kern_return_t unedaemonserver_get_agent(mach_port_t sp, uint32_t session_type, 	
 
 {
 	fprintf(stderr, "cool sending a port over. We got %d %d\n", session_type, audit_token_to_auid(ucreds));
-	*out_agent_port = bootstrap_port;
+	mach_port_t bsport = lookup_bootstrap_registration(audit_token_to_ruid(ucreds), session_type);
+	*out_agent_port = bsport;
 	*out_agent_portPoly = MACH_MSG_TYPE_COPY_SEND;
 	return KERN_SUCCESS;
 }
@@ -68,6 +118,8 @@ kern_return_t unedaemonserver_register(mach_port_t server, uint32_t session_type
 	*death_portPoly = MACH_MSG_TYPE_MAKE_SEND;
 	
 	fprintf(stderr, "Cool registering a port. We got %d %d %d\n", agent_bootstrap_port, session_type, audit_token_to_auid(ucreds));
+	
+	add_bootstrap_registration(audit_token_to_ruid(ucreds), session_type, agent_bootstrap_port);
 	
 	return KERN_SUCCESS;
 }
