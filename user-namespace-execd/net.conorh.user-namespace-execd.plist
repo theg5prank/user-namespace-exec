@@ -12,9 +12,7 @@
 	</array>
 	<key>MachServices</key>
 	<dict>
-		<key>net.conorh.user-namespace-execd.exec</key>
-		<true/>
-		<key>net.conorh.user-namespace-execd.agent</key>
+		<key>net.conorh.user-namespace-execd</key>
 		<true/>
 	</dict>
 </dict>

@@ -25,7 +25,6 @@
 struct user_bootstrap_registration {
 	uid_t uid;
 	mach_port_t bsports[USER_EXEC_SESSION_TYPE_MAX + 1];
-	mach_port_t death_port;
 };
 
 static mach_port_t death_port = MACH_PORT_NULL;
@@ -52,7 +51,6 @@ static struct user_bootstrap_registration *uid_to_bootstrap_registration(uid_t u
 	struct user_bootstrap_registration *registration = &bootstrap_registrations[num_bootstrap_registrations++];
 	
 	registration->uid = uid;
-	registration->death_port = MACH_PORT_NULL;
 	for (int i=0; i < sizeof(registration->bsports) / sizeof(registration->bsports[0]); i++) {
 		registration->bsports[i] = MACH_PORT_NULL;
 	}
@@ -80,12 +78,12 @@ static mach_port_t lookup_bootstrap_registration(uid_t uid, uint32_t session_typ
 	return uid_to_bootstrap_registration(uid)->bsports[session_type];
 }
 
-boolean_t server_demux(mach_msg_header_t *InHeadP, mach_msg_header_t *OutHeadP)
+static boolean_t server_demux(mach_msg_header_t *InHeadP, mach_msg_header_t *OutHeadP)
 {
 	return agentipc_server(InHeadP, OutHeadP) || clientipc_server(InHeadP, OutHeadP);
 }
 
-static void ipc_loop(mach_port_t port_set)
+static void ipc_loop(mach_port_t service_port)
 {
 	kern_return_t kr = KERN_SUCCESS;
 	typedef union {
@@ -98,7 +96,7 @@ static void ipc_loop(mach_port_t port_set)
 	do {
 		kr = mach_msg_server_once(server_demux,
 								  sizeof(MAX_MSG_BUFFER)+ MAX_TRAILER_SIZE,
-								  port_set,
+								  service_port,
 								  MACH_RCV_TRAILER_ELEMENTS(MACH_RCV_TRAILER_AUDIT) | MACH_RCV_TRAILER_TYPE(MACH_MSG_TRAILER_FORMAT_0));
 		if (kr == MACH_RCV_INTERRUPTED) {
 			kr = KERN_SUCCESS;
@@ -111,7 +109,6 @@ static void ipc_loop(mach_port_t port_set)
 kern_return_t unedaemonserver_get_agent(mach_port_t sp, uint32_t session_type, 	mach_port_t *out_agent_port, mach_msg_type_name_t *out_agent_portPoly, audit_token_t ucreds)
 
 {
-	fprintf(stderr, "cool sending a port over. We got %d %d\n", session_type, audit_token_to_auid(ucreds));
 	mach_port_t bsport = lookup_bootstrap_registration(audit_token_to_ruid(ucreds), session_type);
 	*out_agent_port = bsport;
 	*out_agent_portPoly = MACH_MSG_TYPE_COPY_SEND;
@@ -125,8 +122,6 @@ kern_return_t unedaemonserver_register(mach_port_t server, uint32_t session_type
 	*out_death_port = death_port;
 	*death_portPoly = MACH_MSG_TYPE_MAKE_SEND;
 	
-	fprintf(stderr, "Cool registering a port. We got %d %d %d\n", agent_bootstrap_port, session_type, audit_token_to_auid(ucreds));
-	
 	add_bootstrap_registration(audit_token_to_ruid(ucreds), session_type, agent_bootstrap_port);
 	
 	return KERN_SUCCESS;
@@ -134,41 +129,19 @@ kern_return_t unedaemonserver_register(mach_port_t server, uint32_t session_type
 
 int main(int argc, const char * argv[])
 {
-	mach_port_t client_mp = MACH_PORT_NULL;
-	mach_port_t agent_mp  = MACH_PORT_NULL;
-	mach_port_t port_set = MACH_PORT_NULL;
+	mach_port_t service_port = MACH_PORT_NULL;
 	
-	kern_return_t kr = bootstrap_check_in(bootstrap_port, USER_EXEC_CLIENT_CONNECTION_NAME, &client_mp);
+	kern_return_t kr = bootstrap_check_in(bootstrap_port, USER_EXEC_SERVICE_NAME, &service_port);
 	if (kr != KERN_SUCCESS) {
 		errx(EX_UNAVAILABLE, "bootstrap_check_in() failed for client service: %d: %s", kr, mach_error_string(kr));
 	}
-	
-	kr = bootstrap_check_in(bootstrap_port, USER_EXEC_AGENT_CONNECTION_NAME, &agent_mp);
-	if (kr != KERN_SUCCESS) {
-		errx(EX_UNAVAILABLE, "bootstrap_check_in() failed for agent service: %d: %s", kr, mach_error_string(kr));
-	}
-	
-	kr = mach_port_allocate(mach_task_self(), MACH_PORT_RIGHT_PORT_SET, &port_set);
-	if (kr != KERN_SUCCESS) {
-		errx(EX_UNAVAILABLE, "mach_port_allocate() failed to create port set: %d: %s", kr, mach_error_string(kr));
-	}
-	
+
 	kr = mach_port_allocate(mach_task_self(), MACH_PORT_RIGHT_RECEIVE, &death_port);
 	if (kr != KERN_SUCCESS) {
 		errx(EX_OSERR, "mach_port_allocate() failed to create port: %d: %s", kr, mach_error_string(kr));
 	}
 	
-	kr = mach_port_move_member(mach_task_self(), client_mp, port_set);
-	if (kr != KERN_SUCCESS) {
-		errx(EX_OSERR, "could not move client port into port set: %d: %s", kr, mach_error_string(kr));
-	}
-	
-	kr = mach_port_move_member(mach_task_self(), agent_mp, port_set);
-	if (kr != KERN_SUCCESS) {
-		errx(EX_OSERR, "could not move agent port into port set: %d: %s", kr, mach_error_string(kr));
-	}
-	
-	ipc_loop(port_set);
+	ipc_loop(service_port);
 	errx(EX_SOFTWARE, "ipc loop returned?");
     return EX_OSERR;
 }

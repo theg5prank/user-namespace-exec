@@ -27,7 +27,7 @@ int main(int argc, const char * argv[])
 	mach_port_t server = MACH_PORT_NULL;
 	mach_port_t new_bsport = MACH_PORT_NULL;
 	
-	kern_return_t kr = bootstrap_look_up(bootstrap_port, USER_EXEC_CLIENT_CONNECTION_NAME, &server);
+	kern_return_t kr = bootstrap_look_up(bootstrap_port, USER_EXEC_SERVICE_NAME, &server);
 	
 	if (kr != KERN_SUCCESS) {
 		errx(EX_SOFTWARE, "Couldn't look up service: %s", mach_error_string(kr));

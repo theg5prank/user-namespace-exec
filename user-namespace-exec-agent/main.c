@@ -27,7 +27,7 @@ void register_with_daemon(void)
 	mach_port_t prev_notification_port = MACH_PORT_NULL;
 	mach_port_t death_port = MACH_PORT_NULL;
 	
-	kern_return_t kr = bootstrap_look_up(bootstrap_port, USER_EXEC_AGENT_CONNECTION_NAME, &server_port);
+	kern_return_t kr = bootstrap_look_up(bootstrap_port, USER_EXEC_SERVICE_NAME, &server_port);
 	
 	if (kr != KERN_SUCCESS) {
 		errx(EX_SOFTWARE, "Couldn't look up service: %s", mach_error_string(kr));
