@@ -60,7 +60,7 @@ kern_return_t do_mach_notify_dead_name(mach_port_t notify, mach_port_name_t name
 	kr = mach_port_deallocate(mach_task_self(), name);
 	
 	if (kr != KERN_SUCCESS) {
-		warnx("Could not deallocate supposed dead name");
+		warnx("Could not deallocate supposed dead name: %s", mach_error_string(kr));
 	}
 
 	register_with_daemon();
@@ -113,13 +113,13 @@ int main(int argc, const char * argv[])
 }
 
 kern_return_t do_mach_notify_port_deleted(mach_port_t notify, mach_port_name_t name)
-{ return KERN_SUCCESS; }
+{ errx(EX_OSERR, "Did not expect name to be made available rather than dead!?"); }
 
 kern_return_t do_mach_notify_port_destroyed(mach_port_t notify, mach_port_t rights)
-{ errx(EXIT_FAILURE, "Did not request any port destroyed notifications!?"); }
+{ errx(EX_OSERR, "Did not request any port destroyed notifications!?"); }
 
 kern_return_t do_mach_notify_no_senders(mach_port_t notify, mach_port_mscount_t mscount)
-{ errx(EXIT_FAILURE, "Did not request any no senders notifications!?"); }
+{ errx(EX_OSERR, "Did not request any no senders notifications!?"); }
 
 kern_return_t do_mach_notify_send_once(mach_port_t notify)
-{ errx(EXIT_FAILURE, "A send-once right was destroyed!?"); }
+{ errx(EX_OSERR, "A send-once right was destroyed!?"); }
