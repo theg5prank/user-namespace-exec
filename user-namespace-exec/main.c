@@ -33,6 +33,15 @@ int main(int argc, const char * argv[])
 		errx(EX_SOFTWARE, "Couldn't look up service: %s", mach_error_string(kr));
 	}
 	
+	if (strcmp(argv[1], "--dump") == 0) {
+		kr = unedaemonclient_dump_state(server);
+		if (kr != KERN_SUCCESS) {
+			errx(EX_SOFTWARE, "Could not send dump state ping: %s", mach_error_string(kr));
+		} else {
+			exit(EXIT_SUCCESS);
+		}
+	}
+	
 	unedaemonclient_get_agent(server, USER_EXEC_SESSION_TYPE_BACKGROUND, &new_bsport, WAIT_TIME);
 	
 	if (kr != KERN_SUCCESS) {

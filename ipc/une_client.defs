@@ -13,3 +13,8 @@ routine get_agent
 	ServerAuditToken ucreds : audit_token_t;
 	waittime wait : uint32_t
 );
+
+simpleroutine dump_state
+(
+	requestport server : mach_port_t
+);

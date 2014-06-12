@@ -42,7 +42,7 @@ static struct user_bootstrap_registration *uid_to_bootstrap_registration(uid_t u
 	}
 	
 	if (num_bootstrap_registrations >= bootstrap_registrations_size) {
-		size_t newsize = num_bootstrap_registrations ? sizeof(*bootstrap_registrations) * num_bootstrap_registrations * 2 : 8;
+		size_t newsize = sizeof(*bootstrap_registrations) * (num_bootstrap_registrations ? num_bootstrap_registrations * 2 : 8);
 		bootstrap_registrations = realloc(bootstrap_registrations, newsize);
 		if (!bootstrap_registrations) { err(EX_OSERR, "realloc failed, allocation size %zu", newsize); }
 		bootstrap_registrations_size = newsize;
@@ -56,6 +56,19 @@ static struct user_bootstrap_registration *uid_to_bootstrap_registration(uid_t u
 	}
 	
 	return registration;
+}
+
+static void dump_registrations(FILE *stream)
+{
+	fprintf(stream, "--BEGIN REGISTRATION DUMP");
+	for (int i=0; i < num_bootstrap_registrations; i++) {
+		fprintf(stream, "\n");
+		fprintf(stream, "%d:\n", bootstrap_registrations[i].uid);
+		fprintf(stream, "\tSystem:\t0x%08x\n", bootstrap_registrations[i].bsports[USER_EXEC_SESSION_TYPE_SYSTEM]);
+		fprintf(stream, "\tBackground:\t0x%08x\n", bootstrap_registrations[i].bsports[USER_EXEC_SESSION_TYPE_BACKGROUND]);
+		fprintf(stream, "\tAqua:\t0x%08x\n", bootstrap_registrations[i].bsports[USER_EXEC_SESSION_TYPE_AQUA]);
+	}
+	fprintf(stream, "--END REGISTRATION DUMP\n");
 }
 
 static void add_bootstrap_registration(uid_t uid, uint32_t session_type, mach_port_t bsport)
@@ -124,6 +137,12 @@ kern_return_t unedaemonserver_register(mach_port_t server, uint32_t session_type
 	
 	add_bootstrap_registration(audit_token_to_ruid(ucreds), session_type, agent_bootstrap_port);
 	
+	return KERN_SUCCESS;
+}
+
+kern_return_t unedaemonserver_dump_state(mach_port_t server)
+{
+	dump_registrations(stderr);
 	return KERN_SUCCESS;
 }
 
