@@ -45,7 +45,7 @@ static struct user_bootstrap_registration *uid_to_bootstrap_registration(uid_t u
 	if (num_bootstrap_registrations >= bootstrap_registrations_size) {
 		size_t newsize = num_bootstrap_registrations ? sizeof(*bootstrap_registrations) * num_bootstrap_registrations * 2 : 8;
 		bootstrap_registrations = realloc(bootstrap_registrations, newsize);
-		assert(bootstrap_registrations);
+		if (!bootstrap_registrations) { err(EX_OSERR, "realloc failed, allocation size %zu", newsize); }
 		bootstrap_registrations_size = newsize;
 	}
 	
@@ -63,6 +63,14 @@ static struct user_bootstrap_registration *uid_to_bootstrap_registration(uid_t u
 static void add_bootstrap_registration(uid_t uid, uint32_t session_type, mach_port_t bsport)
 {
 	struct user_bootstrap_registration *registration = uid_to_bootstrap_registration(uid);
+	
+	if (registration->bsports[session_type] != MACH_PORT_NULL) {
+		kern_return_t kr = mach_port_deallocate(mach_task_self(), registration->bsports[session_type]);
+		
+		if (kr != KERN_SUCCESS) {
+			warnx("Could not deallocate old bootstrap port send right: %s", mach_error_string(kr));
+		}
+	}
 	
 	registration->bsports[session_type] = bsport;
 }
