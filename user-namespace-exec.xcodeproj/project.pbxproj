@@ -571,12 +571,14 @@
 		EF9758B718B5A640006B774B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				WARNING_LDFLAGS = "-Weverything";
 			};
 			name = Debug;
 		};
 		EF9758B818B5A640006B774B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				WARNING_LDFLAGS = "-Weverything";
 			};
 			name = Release;
 		};

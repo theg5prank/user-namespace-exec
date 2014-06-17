@@ -82,6 +82,10 @@ int main(int argc, const char * argv[])
 		session_id = USER_EXEC_SESSION_TYPE_AQUA;
 	} else if (!strcasecmp(session, "Background")) {
 		session_id = USER_EXEC_SESSION_TYPE_BACKGROUND;
+	} else if (!strcasecmp(session, "LoginWindow")) {
+		session_id = USER_EXEC_SESSION_TYPE_LOGINWINDOW;
+	} else if (!strcasecmp(session, "StandardIO")) {
+		session_id = USER_EXEC_SESSION_TYPE_STANDARDIO;
 	} else {
 		errx(EX_USAGE, "invalid session type %s", session);
 	}

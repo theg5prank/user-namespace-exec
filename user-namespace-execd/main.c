@@ -67,6 +67,8 @@ static void dump_registrations(FILE *stream)
 		fprintf(stream, "\tSystem:\t0x%08x\n", bootstrap_registrations[i].bsports[USER_EXEC_SESSION_TYPE_SYSTEM]);
 		fprintf(stream, "\tBackground:\t0x%08x\n", bootstrap_registrations[i].bsports[USER_EXEC_SESSION_TYPE_BACKGROUND]);
 		fprintf(stream, "\tAqua:\t0x%08x\n", bootstrap_registrations[i].bsports[USER_EXEC_SESSION_TYPE_AQUA]);
+		fprintf(stream, "\tLoginwindow:\t0x%08x\n", bootstrap_registrations[i].bsports[USER_EXEC_SESSION_TYPE_LOGINWINDOW]);
+		fprintf(stream, "\tStandardIO:\t0x%08x\n", bootstrap_registrations[i].bsports[USER_EXEC_SESSION_TYPE_STANDARDIO]);
 	}
 	fprintf(stream, "--END REGISTRATION DUMP\n");
 }
@@ -132,6 +134,11 @@ kern_return_t unedaemonserver_register(mach_port_t server, uint32_t session_type
 									   mach_port_t agent_bootstrap_port, mach_port_t *out_death_port,
 									   mach_msg_type_name_t *death_portPoly, audit_token_t ucreds)
 {
+	if (session_type > USER_EXEC_SESSION_TYPE_MAX) {
+		warnx("Unknown session type %u", session_type);
+		return KERN_INVALID_ARGUMENT;
+	}
+
 	*out_death_port = death_port;
 	*death_portPoly = MACH_MSG_TYPE_MAKE_SEND;
 	
