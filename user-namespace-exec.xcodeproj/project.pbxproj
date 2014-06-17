@@ -23,7 +23,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		EF0FB3A418B5AAAD00C701FB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0FB3A318B5AAAD00C701FB /* Foundation.framework */; };
 		EF0FB3A718B5AAAD00C701FB /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = EF0FB3A618B5AAAD00C701FB /* main.c */; };
 		EF0FB3AB18B5AAAD00C701FB /* user-namespace-exec.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = EF0FB3AA18B5AAAD00C701FB /* user-namespace-exec.1 */; };
 		EF5A7BC918B5B6CD0083DE78 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = EF5A7BC818B5B6CD0083DE78 /* main.c */; };
@@ -119,7 +118,6 @@
 
 /* Begin PBXFileReference section */
 		EF0FB3A118B5AAAD00C701FB /* user-namespace-exec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "user-namespace-exec"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF0FB3A318B5AAAD00C701FB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EF0FB3A618B5AAAD00C701FB /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		EF0FB3AA18B5AAAD00C701FB /* user-namespace-exec.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = "user-namespace-exec.1"; sourceTree = "<group>"; };
 		EF5A7BC018B5B6490083DE78 /* user-namespace-exec-constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "user-namespace-exec-constants.h"; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF0FB3A418B5AAAD00C701FB /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,13 +161,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EF0FB3A218B5AAAD00C701FB /* Frameworks */ = {
+		EF0FB3A218B5AAAD00C701FB /* Libraries and Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				EF8F62191946A542004612B0 /* libbsm.dylib */,
-				EF0FB3A318B5AAAD00C701FB /* Foundation.framework */,
 			);
-			name = Frameworks;
+			name = "Libraries and Frameworks";
 			sourceTree = "<group>";
 		};
 		EF0FB3A518B5AAAD00C701FB /* user-namespace-exec */ = {
@@ -242,7 +238,7 @@
 				EF9758BF18B5A666006B774B /* user-namespace-execd */,
 				EF0FB3A518B5AAAD00C701FB /* user-namespace-exec */,
 				EF5A7BC718B5B6CD0083DE78 /* user-namespace-exec-agent */,
-				EF0FB3A218B5AAAD00C701FB /* Frameworks */,
+				EF0FB3A218B5AAAD00C701FB /* Libraries and Frameworks */,
 				EF9758BE18B5A666006B774B /* Products */,
 			);
 			sourceTree = "<group>";
