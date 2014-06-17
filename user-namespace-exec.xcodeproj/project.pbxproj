@@ -121,12 +121,10 @@
 		EF0FB3A118B5AAAD00C701FB /* user-namespace-exec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "user-namespace-exec"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0FB3A318B5AAAD00C701FB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EF0FB3A618B5AAAD00C701FB /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		EF0FB3A918B5AAAD00C701FB /* user-namespace-exec-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "user-namespace-exec-Prefix.pch"; sourceTree = "<group>"; };
 		EF0FB3AA18B5AAAD00C701FB /* user-namespace-exec.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = "user-namespace-exec.1"; sourceTree = "<group>"; };
 		EF5A7BC018B5B6490083DE78 /* user-namespace-exec-constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "user-namespace-exec-constants.h"; sourceTree = "<group>"; };
 		EF5A7BC518B5B6CD0083DE78 /* user-namespace-exec-agent */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "user-namespace-exec-agent"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF5A7BC818B5B6CD0083DE78 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		EF5A7BCB18B5B6CD0083DE78 /* user-namespace-exec-agent-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "user-namespace-exec-agent-Prefix.pch"; sourceTree = "<group>"; };
 		EF5A7BCC18B5B6CD0083DE78 /* user-namespace-exec-agent.8 */ = {isa = PBXFileReference; lastKnownFileType = text; path = "user-namespace-exec-agent.8"; sourceTree = "<group>"; };
 		EF5A7BD318B5B8E00083DE78 /* net.conorh.user-namespace-exec-agent.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "net.conorh.user-namespace-exec-agent.plist"; sourceTree = "<group>"; };
 		EF824099190757340042F767 /* une_client.defs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mig; path = une_client.defs; sourceTree = "<group>"; };
@@ -188,7 +186,6 @@
 		EF0FB3A818B5AAAD00C701FB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				EF0FB3A918B5AAAD00C701FB /* user-namespace-exec-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -215,7 +212,6 @@
 			isa = PBXGroup;
 			children = (
 				EF5A7BD318B5B8E00083DE78 /* net.conorh.user-namespace-exec-agent.plist */,
-				EF5A7BCB18B5B6CD0083DE78 /* user-namespace-exec-agent-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -435,8 +431,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "user-namespace-exec/user-namespace-exec-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -476,8 +470,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "user-namespace-exec/user-namespace-exec-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -511,8 +503,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "user-namespace-exec-agent/user-namespace-exec-agent-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -553,8 +543,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "user-namespace-exec-agent/user-namespace-exec-agent-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
