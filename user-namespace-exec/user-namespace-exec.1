@@ -1,0 +1,42 @@
+.\"Modified from man(1) of FreeBSD, the NetBSD mdoc.template, and mdoc.samples.
+.\"See Also:
+.\"man mdoc.samples for a complete listing of options
+.\"man mdoc for the short list of editing options
+.\"/usr/share/misc/mdoc.template
+.Dd 6/16/14               \" DATE
+.Dt user-namespace-exec 1      \" Program name and manual section number
+.Os Darwin
+.Sh NAME                 \" Section Header - required - don't modify 
+.Nm user-namespace-exec
+.\" The following lines are read in generating the apropos(man -k) database. Use only key
+.\" words here as the database is built based on the words here and in the .ND line. 
+.\".Nm Other_name_for_same_program(),
+.\".Nm Yet another name for the same program.
+.\" Use .Nm macro to designate other names for the documented program.
+.Nd Execute a command in a different bootstrap namespace for the same user.
+.Sh SYNOPSIS             \" Section Header - required - don't modify
+.Nm
+.Ar argv0 ...
+.Sh DESCRIPTION          \" Section Header - required - don't modify
+.Nm
+allows the user to execute a command in a different Mach bootstrap namespace. The send right to the
+bootstrap server for that namespace must be registered with
+.Xr user-namespace-execd 8 by
+.Xr user-namespace-exec-agent 8 .
+Installing the
+.Nm
+suite of tools typically installs a
+.Xr launchd.plist 5
+for
+.Xr user-namespace-exec-agent
+which executes it in the user's Background session, along with a
+.Xr launchd.plist 5
+for
+.Xr user-namespace-execd 8 .
+.Sh BUGS
+There is currently no mechanism for specifying a session other than the Background session.
+.Sh SEE ALSO
+.\" List links in ascending order by section, alphabetically within a section.
+.\" Please do not reference files that do not exist without filing a bug report
+.Xr user-namespace-execd 8 ,
+.Xr user-namespace-exec-agent 8

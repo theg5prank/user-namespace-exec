@@ -1,0 +1,33 @@
+.\"Modified from man(1) of FreeBSD, the NetBSD mdoc.template, and mdoc.samples.
+.\"See Also:
+.\"man mdoc.samples for a complete listing of options
+.\"man mdoc for the short list of editing options
+.\"/usr/share/misc/mdoc.template
+.Dd 6/11/14               \" DATE
+.Dt user-namespace-execd 8      \" Program name and manual section number
+.Os Darwin
+.Sh NAME                 \" Section Header - required - don't modify 
+.Nm user-namespace-execd
+.\" The following lines are read in generating the apropos(man -k) database. Use only key
+.\" words here as the database is built based on the words here and in the .ND line. 
+.\".Nm Other_name_for_same_program(),
+.\".Nm Yet another name for the same program.
+.\" Use .Nm macro to designate other names for the documented program.
+.Nd Daemon for user-namespace-exec
+.Sh SYNOPSIS             \" Section Header - required - don't modify
+.Nm
+.Sh DESCRIPTION          \" Section Header - required - don't modify
+.Nm
+is a daemon that supports 
+.Xr user-namespace-exec 1
+by maintaining a mapping from 2-tuples (uid, session type) to send rights for that session's
+bootstrap service.
+.Pp
+Users should not invoke
+.Nm
+manually.
+.Sh SEE ALSO 
+.\" List links in ascending order by section, alphabetically within a section.
+.\" Please do not reference files that do not exist without filing a bug report
+.Xr user-namespace-exec 1 ,
+.Xr user-namespace-exec-agent 8
