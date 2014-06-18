@@ -58,6 +58,12 @@ kern_return_t do_mach_notify_dead_name(mach_port_t notify, mach_port_name_t name
 	warnx("Daemon died. Reconnecting...");
 	
 	kr = mach_port_deallocate(mach_task_self(), name);
+	if (kr == KERN_SUCCESS) {
+		/* We actually have two user references on this dead name, as the notification
+		 * increments the reference count by one.
+		 */
+		kr = mach_port_deallocate(mach_task_self(), name);
+	}
 	
 	if (kr != KERN_SUCCESS) {
 		warnx("Could not deallocate supposed dead name: %s", mach_error_string(kr));
