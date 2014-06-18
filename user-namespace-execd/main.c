@@ -73,7 +73,7 @@ static void dump_registrations(FILE *stream)
 	fprintf(stream, "--END REGISTRATION DUMP\n");
 }
 
-static void add_bootstrap_registration(uid_t uid, uint32_t session_type, mach_port_t bsport)
+static void add_bootstrap_registration(uid_t uid, enum user_exec_session_types session_type, mach_port_t bsport)
 {
 	struct user_bootstrap_registration *registration = uid_to_bootstrap_registration(uid);
 	
@@ -88,7 +88,7 @@ static void add_bootstrap_registration(uid_t uid, uint32_t session_type, mach_po
 	registration->bsports[session_type] = bsport;
 }
 
-static mach_port_t lookup_bootstrap_registration(uid_t uid, uint32_t session_type)
+static mach_port_t lookup_bootstrap_registration(uid_t uid, enum user_exec_session_types session_type)
 {
 	return uid_to_bootstrap_registration(uid)->bsports[session_type];
 }
@@ -124,6 +124,10 @@ static void ipc_loop(mach_port_t service_port)
 kern_return_t unedaemonserver_get_agent(mach_port_t sp, uint32_t session_type, 	mach_port_t *out_agent_port, mach_msg_type_name_t *out_agent_portPoly, audit_token_t ucreds)
 
 {
+	if (session_type > USER_EXEC_SESSION_TYPE_MAX) {
+		warnx("Unknown session type for lookup %u", session_type);
+		return KERN_INVALID_ARGUMENT;
+	}
 	mach_port_t bsport = lookup_bootstrap_registration(audit_token_to_ruid(ucreds), session_type);
 	*out_agent_port = bsport;
 	*out_agent_portPoly = MACH_MSG_TYPE_COPY_SEND;
@@ -135,7 +139,7 @@ kern_return_t unedaemonserver_register(mach_port_t server, uint32_t session_type
 									   mach_msg_type_name_t *death_portPoly, audit_token_t ucreds)
 {
 	if (session_type > USER_EXEC_SESSION_TYPE_MAX) {
-		warnx("Unknown session type %u", session_type);
+		warnx("Unknown session type for registration %u", session_type);
 		return KERN_INVALID_ARGUMENT;
 	}
 
