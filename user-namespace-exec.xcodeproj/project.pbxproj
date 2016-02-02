@@ -25,13 +25,13 @@
 /* Begin PBXBuildFile section */
 		EF0FB3A718B5AAAD00C701FB /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = EF0FB3A618B5AAAD00C701FB /* main.c */; };
 		EF0FB3AB18B5AAAD00C701FB /* user-namespace-exec.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = EF0FB3AA18B5AAAD00C701FB /* user-namespace-exec.1 */; };
+		EF4D55151C615FCE00711F46 /* notify.defs in Sources */ = {isa = PBXBuildFile; fileRef = EF4D55141C615FCE00711F46 /* notify.defs */; settings = {ATTRIBUTES = (Server, ); }; };
 		EF5A7BC918B5B6CD0083DE78 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = EF5A7BC818B5B6CD0083DE78 /* main.c */; };
 		EF5A7BCD18B5B6CD0083DE78 /* user-namespace-exec-agent.8 in CopyFiles */ = {isa = PBXBuildFile; fileRef = EF5A7BCC18B5B6CD0083DE78 /* user-namespace-exec-agent.8 */; };
 		EF5A7BD518B5B9750083DE78 /* net.conorh.user-namespace-exec-agent.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = EF5A7BD318B5B8E00083DE78 /* net.conorh.user-namespace-exec-agent.plist */; };
 		EF82409A190757340042F767 /* une_client.defs in Sources */ = {isa = PBXBuildFile; fileRef = EF824099190757340042F767 /* une_client.defs */; settings = {ATTRIBUTES = (Server, ); }; };
 		EF82409B190759020042F767 /* une_client.defs in Sources */ = {isa = PBXBuildFile; fileRef = EF824099190757340042F767 /* une_client.defs */; };
 		EF8F621A1946A542004612B0 /* libbsm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8F62191946A542004612B0 /* libbsm.dylib */; };
-		EF8F621E1947EDBF004612B0 /* notify.defs in Sources */ = {isa = PBXBuildFile; fileRef = EF8F621C1947EDB9004612B0 /* notify.defs */; settings = {ATTRIBUTES = (Server, ); }; };
 		EF9758C118B5A666006B774B /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = EF9758C018B5A666006B774B /* main.c */; };
 		EF9758C318B5A666006B774B /* user-namespace-execd.8 in CopyFiles */ = {isa = PBXBuildFile; fileRef = EF9758C218B5A666006B774B /* user-namespace-execd.8 */; };
 		EF9758D418B5AA36006B774B /* net.conorh.user-namespace-execd.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = EF9758C818B5A6C3006B774B /* net.conorh.user-namespace-execd.plist */; };
@@ -120,6 +120,7 @@
 		EF0FB3A118B5AAAD00C701FB /* user-namespace-exec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "user-namespace-exec"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0FB3A618B5AAAD00C701FB /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		EF0FB3AA18B5AAAD00C701FB /* user-namespace-exec.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = "user-namespace-exec.1"; sourceTree = "<group>"; };
+		EF4D55141C615FCE00711F46 /* notify.defs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mig; name = notify.defs; path = usr/include/mach/notify.defs; sourceTree = SDKROOT; };
 		EF5A7BC018B5B6490083DE78 /* user-namespace-exec-constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "user-namespace-exec-constants.h"; sourceTree = "<group>"; };
 		EF5A7BC518B5B6CD0083DE78 /* user-namespace-exec-agent */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "user-namespace-exec-agent"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF5A7BC818B5B6CD0083DE78 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
@@ -127,7 +128,6 @@
 		EF5A7BD318B5B8E00083DE78 /* net.conorh.user-namespace-exec-agent.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "net.conorh.user-namespace-exec-agent.plist"; sourceTree = "<group>"; };
 		EF824099190757340042F767 /* une_client.defs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mig; path = une_client.defs; sourceTree = "<group>"; };
 		EF8F62191946A542004612B0 /* libbsm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbsm.dylib; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/libbsm.dylib; sourceTree = DEVELOPER_DIR; };
-		EF8F621C1947EDB9004612B0 /* notify.defs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mig; name = notify.defs; path = ../../../../usr/include/mach/notify.defs; sourceTree = "<group>"; };
 		EF9758BD18B5A666006B774B /* user-namespace-execd */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "user-namespace-execd"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF9758C018B5A666006B774B /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		EF9758C218B5A666006B774B /* user-namespace-execd.8 */ = {isa = PBXFileReference; lastKnownFileType = text; path = "user-namespace-execd.8"; sourceTree = "<group>"; };
@@ -224,7 +224,7 @@
 		EF8F621B1947ED97004612B0 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				EF8F621C1947EDB9004612B0 /* notify.defs */,
+				EF4D55141C615FCE00711F46 /* notify.defs */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -369,7 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF8F621E1947EDBF004612B0 /* notify.defs in Sources */,
+				EF4D55151C615FCE00711F46 /* notify.defs in Sources */,
 				EFC8285E193D769A001367B8 /* une_agent.defs in Sources */,
 				EF5A7BC918B5B6CD0083DE78 /* main.c in Sources */,
 			);

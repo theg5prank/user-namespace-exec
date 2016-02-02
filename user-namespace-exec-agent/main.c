@@ -95,15 +95,15 @@ int main(int argc, const char * argv[])
 	} else {
 		errx(EX_USAGE, "invalid session type %s", session);
 	}
-
+    
 	kern_return_t kr = mach_port_allocate(mach_task_self(), MACH_PORT_RIGHT_RECEIVE, &notification_port);
 	
 	if (kr != KERN_SUCCESS) {
 		errx(EX_SOFTWARE, "Couldn't allocate mach port: %s", mach_error_string(kr));
 	}
-	
+    
 	register_with_daemon();
-	
+
 	typedef union {
 		union __RequestUnion__do_notify_subsystem req;
 		union __ReplyUnion__do_notify_subsystem rep;
