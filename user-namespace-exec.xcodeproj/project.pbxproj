@@ -347,10 +347,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				EF9758CC18B5A9AE006B774B /* all */,
 				EF9758BC18B5A666006B774B /* user-namespace-execd */,
 				EF0FB3A018B5AAAD00C701FB /* user-namespace-exec */,
 				EF5A7BC418B5B6CD0083DE78 /* user-namespace-exec-agent */,
-				EF9758CC18B5A9AE006B774B /* all */,
 			);
 		};
 /* End PBXProject section */
